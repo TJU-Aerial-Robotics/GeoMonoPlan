@@ -1,0 +1,25 @@
+# CUDA-enabled PyTorch wheels for the Linux x86_64 setup.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch>=2.4
+torchvision>=0.19
+torch==2.4.1+cu121; sys_platform == "linux" and platform_machine == "x86_64"
+torchvision==0.19.1+cu121; sys_platform == "linux" and platform_machine == "x86_64"
+
+# PT inference: model construction, numerical operations and image processing.
+ultralytics==8.4.174
+numpy>=1.24,<2
+scipy>=1.10
+opencv-python>=4.8,<4.12
+PyYAML>=6,<7
+
+# ROS Python helpers. Install ROS1 Noetic, rospy and cv_bridge through ROS;
+# build/source the controller workspace for quadrotor_msgs/PositionCommand.
+rospkg>=1.5
+catkin_pkg>=1.0
+
+# Model conversion: PT -> ONNX -> two TensorRT engines.
+onnx>=1.16,<1.18
+
+# Full TensorRT builder and runtime for the validated Linux x86_64 CUDA 12 setup.
+# Jetson uses the TensorRT installation supplied by its matching JetPack release.
+tensorrt-cu12==11.1.0.106; sys_platform == "linux" and platform_machine == "x86_64"

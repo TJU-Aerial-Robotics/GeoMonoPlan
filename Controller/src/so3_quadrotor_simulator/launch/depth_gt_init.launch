@@ -1,0 +1,10 @@
+<launch>
+    <arg name="init_x" value="0.0"/>
+    <arg name="init_y" value="0.0"/>
+    <arg name="init_z" value="2.0"/> 
+
+    <node pkg="so3_quadrotor_simulator" type="quadrotor_simulator_so3" name="quadrotor_simulator_so3" output="screen">
+        <param name="rate/odom" value="50.0"/>
+    </node>
+
+</launch>

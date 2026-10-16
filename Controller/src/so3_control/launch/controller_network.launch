@@ -1,0 +1,19 @@
+<launch>
+    <arg name="hover_thrust" default="0.38" />
+
+    <node pkg="so3_control" type="network_control_node" name="network_controller_node" output="screen">
+        <param name="is_simulation" value="false"/>
+        <param name="use_disturbance_observer" value="true"/>
+        <param name="hover_thrust" value="$(arg hover_thrust)"/>
+        <param name="kx_xy" value="5.7"/>
+        <param name="kx_z" value="6.2"/>
+        <param name="kv_xy" value="3.4"/>
+        <param name="kv_z" value="4.0"/>
+        <remap from="~odom" to="/vins_estimator/imu_propagate"/>
+        <remap from="~imu" to="/mavros/imu/data_raw"/>
+        <remap from="~position_cmd" to="/so3_control/pos_cmd"/>
+        <remap from="~so3_cmd" to="so3_cmd"/>
+        <param name="record_log" value = "true"/>
+        <param name="logger_file_name" value = "$(find so3_control)/logger/"/>   
+    </node>
+</launch>

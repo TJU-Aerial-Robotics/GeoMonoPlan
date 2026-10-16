@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="28" viewBox="0 0 100 28" role="img" aria-label="Bilibili">
+  <title>Bilibili</title>
+  <rect width="100" height="28" rx="5" fill="#fb7299"/>
+  <path d="m15 6 3 4m6-4-3 4M12 10h15v11H12zM16 14v3m7-3v3" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="65" y="18.5" text-anchor="middle" fill="#fff" font-family="Verdana,Arial,sans-serif" font-size="12">Bilibili</text>
+</svg>
