@@ -1,0 +1,32 @@
+# Paths are relative to the GeoMonoPlan repository, including from another cwd.
+weights: weights/geomonoplan.pt
+engine_dir: engines
+device: cuda:0
+# Requested planning speed (m/s). Acceleration scales quadratically and segment
+# duration inversely with speed, matching the original planner. PT and engine
+# share this setting; changing it does not require rebuilding the engines.
+velocity: 6.0
+
+ros:
+  image_topic: /rgb/image
+  odom_topic: /sim/odom
+  goal_topic: /move_base_simple/goal
+  enable_topic: /yopo_net/flight_enable
+  command_topic: /so3_control/pos_cmd
+  # Planned trajectory as nav_msgs/Path.
+  trajectory_topic: /trajectory
+  world_frame: world
+  goal: [40.0, 0.0, 1.2]
+  # Original optional external start/stop gate. Normal runs start immediately.
+  validation_mode: false
+  # Planner output publication rate; new plans follow incoming images.
+  # Each publication advances the trajectory by the fixed ctrl_dt in the node.
+  plan_hz: 50.0
+  camera_pitch_deg: 0.0
+  plan_from_reference: false
+  auto_arrival_hold: true
+  arrival_tolerance_m: 5.0
+  visualize: true
+  # Log stage processing latency once per second (PT and engine).
+  # Uses the original post-inference CUDA synchronization in both modes.
+  verbose: false

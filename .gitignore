@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+engines/*
+!engines/.gitkeep
+weights/*
+!weights/README.md
+prediction.npz
+/Controller/build/
+/Controller/devel/
+/Controller/install/
+/Controller/logs/
+/Controller/.catkin_tools/
