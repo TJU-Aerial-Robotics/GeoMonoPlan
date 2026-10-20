@@ -1,0 +1,37 @@
+<launch>
+    <arg name="init_x" value="15.0"/>
+    <arg name="init_y" value="-10.0"/>
+    <arg name="init_z" value="1.0"/> 
+    <arg name="enable_min_height_guard" default="false"/>
+    <arg name="min_height" default="0.5"/>
+    <arg name="min_height_guard_margin" default="0.3"/>
+
+    <node pkg="so3_quadrotor_simulator" type="quadrotor_simulator_so3" name="quadrotor_simulator_so3" output="screen">
+        <param name="rate/odom" value="100.0"/>
+        <param name="simulator/init_state_x" value="$(arg init_x)"/>
+        <param name="simulator/init_state_y" value="$(arg init_y)"/>
+        <param name="simulator/init_state_z" value="$(arg init_z)"/>
+        <remap from="~odom" to="/sim/odom"/>
+        <remap from="~imu" to="/sim/imu"/>
+        <remap from="~cmd" to="so3_cmd"/>
+        <remap from="~reset_pose" to="/sim/reset_pose"/>
+        <remap from="~force_disturbance" to="force_disturbance"/>    
+        <remap from="~moment_disturbance" to="moment_disturbance"/>        
+    </node>
+
+    <node pkg="so3_control" type="network_control_node" name="network_controller_node" output="screen">
+        <param name="is_simulation" value="true"/>
+        <param name="use_disturbance_observer" value="true"/>
+        <param name="hover_thrust" value="0.375"/>
+        <param name="enable_min_height_guard" value="$(arg enable_min_height_guard)"/>
+        <param name="min_height" value="$(arg min_height)"/>
+        <param name="min_height_guard_margin" value="$(arg min_height_guard_margin)"/>
+        <remap from="~odom" to="/sim/odom"/>
+        <remap from="~imu" to="/sim/imu"/>
+        <remap from="~position_cmd" to="/so3_control/pos_cmd"/>
+        <remap from="~so3_cmd" to="so3_cmd"/>
+        <param name="record_log" value = "false"/>  
+        <param name="logger_file_name" value = "$(find so3_control)/logger/"/>   
+    </node>
+
+</launch>
